@@ -16,6 +16,14 @@ class Voxel(Button):
             highlight_color=color.lime
         )
 
+    def input(self, key):
+        if self.hovered:
+            if key == 'left mouse down':
+                destroy(self)
+
+            if key == 'right mouse down':
+                Voxel(position=self.position + mouse.normal)
+
 
 for z in range(30):
     for x in range(30):
