@@ -4,6 +4,17 @@ from ursina.prefabs.first_person_controller import FirstPersonController
 app = Ursina()
 
 
+class Sky(Entity):
+    def __init__(self):
+        super().__init__(
+            parent=scene,
+            model='sphere',
+            texture=load_texture('assets/skybox.jpg'),
+            scale=500,
+            double_sided=True
+        )
+
+
 class Voxel(Button):
     def __init__(self, position=(0, 0, 0)):
         super().__init__(
@@ -24,6 +35,8 @@ class Voxel(Button):
             if key == 'right mouse down':
                 Voxel(position=self.position + mouse.normal)
 
+
+Sky()
 
 for z in range(30):
     for x in range(30):
