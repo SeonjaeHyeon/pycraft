@@ -20,11 +20,12 @@ class Voxel(Button):
         super().__init__(
             parent=scene,
             position=position,
-            model='cube',
+            model='assets/block',
             origin_y=.5,
-            texture='white_cube',
+            texture=load_texture('assets/grass_block.png'),
             color=color.color(0, 0, random.uniform(.9, 1.0)),
-            highlight_color=color.lime
+            scale=.5,
+            highlight_color=color.white
         )
 
     def input(self, key):
