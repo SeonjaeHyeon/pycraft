@@ -16,13 +16,15 @@ class Sky(Entity):
 
 
 class Voxel(Button):
-    def __init__(self, position=(0, 0, 0)):
+    def __init__(self, position=(0, 0, 0), init=True):
+        rand = False if init else random.random() < 0.5
+
         super().__init__(
             parent=scene,
             position=position,
-            model='assets/block',
+            model=('assets/stone' if rand else 'assets/block'),
             origin_y=.5,
-            texture=load_texture('assets/grass_block.png'),
+            texture=load_texture(('assets/stone.png' if rand else 'assets/grass_block')),
             color=color.color(0, 0, random.uniform(.9, 1.0)),
             scale=.5,
             highlight_color=color.white
@@ -34,7 +36,7 @@ class Voxel(Button):
                 destroy(self)
 
             if key == 'right mouse down':
-                Voxel(position=self.position + mouse.normal)
+                Voxel(position=self.position + mouse.normal, init=False)
 
 
 Sky()
