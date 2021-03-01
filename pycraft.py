@@ -18,13 +18,16 @@ class Sky(Entity):
 class Voxel(Button):
     def __init__(self, position=(0, 0, 0), init=True):
         rand = False if init else random.random() < 0.5
+        rand2 = random.randint(0, 1)
+
+        block_list = ['stone.png', 'bricks.png']
 
         super().__init__(
             parent=scene,
             position=position,
             model=('assets/stone' if rand else 'assets/block'),
             origin_y=.5,
-            texture=load_texture(('assets/stone.png' if rand else 'assets/grass_block')),
+            texture=load_texture((f'assets/{block_list[rand2]}' if rand else 'assets/grass_block')),
             color=color.color(0, 0, random.uniform(.9, 1.0)),
             scale=.5,
             highlight_color=color.white
