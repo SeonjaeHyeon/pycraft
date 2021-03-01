@@ -3,6 +3,21 @@ from ursina.prefabs.first_person_controller import FirstPersonController
 
 app = Ursina()
 
+block_id = 0
+block_num = 3
+
+
+def input(key):
+    global block_id
+
+    if key.isdigit():
+        key = int(key)
+
+        if key >= block_num + 1:
+            return
+
+        block_id = key - 1
+
 
 class Sky(Entity):
     def __init__(self):
@@ -17,17 +32,15 @@ class Sky(Entity):
 
 class Voxel(Button):
     def __init__(self, position=(0, 0, 0), init=True):
-        rand = False if init else random.random() < 0.5
-        rand2 = random.randint(0, 1)
 
         block_list = ['stone.png', 'bricks.png']
 
         super().__init__(
             parent=scene,
             position=position,
-            model=('assets/stone' if rand else 'assets/block'),
+            model=('assets/stone' if block_id else 'assets/block'),
             origin_y=.5,
-            texture=load_texture((f'assets/{block_list[rand2]}' if rand else 'assets/grass_block')),
+            texture=load_texture((f'assets/{block_list[block_id - 1]}' if block_id else 'assets/grass_block')),
             color=color.color(0, 0, random.uniform(.9, 1.0)),
             scale=.5,
             highlight_color=color.white
