@@ -6,6 +6,14 @@ app = Ursina()
 block_id = 0
 block_num = 3
 
+map_length = 15
+
+
+def update():
+    if player.y < -map_length * 2:
+        player.x = 0
+        player.y = 0
+        player.z = 0
 
 def input(key):
     global block_id
@@ -57,9 +65,9 @@ class Voxel(Button):
 
 Sky()
 
-for z in range(30):
-    for x in range(30):
-        voxel = Voxel(position=(x, 0, z))
+for z in range(map_length * 2):
+    for x in range(map_length * 2):
+        voxel = Voxel(position=(x - map_length, 0, z - map_length))
 
 player = FirstPersonController()
 app.run()
