@@ -21,7 +21,7 @@ def input(key):
     if key.isdigit():
         key = int(key)
 
-        if key >= block_num + 1:
+        if key >= block_num + 1 or key < 1:
             return
 
         block_id = key - 1
